@@ -1,27 +1,28 @@
 import React, {  useState, useRef } from "react";
 
 function ChangeTheme() {
-   const [color, setColor] = useState({color: "black"});
-   const [pageColor, setPageColor] = useState({backgroundColor: "white"});
-   const [buttonColor, setButtonColor] = useState({color: "black"});
-   const [buttonBackgroundColor, setButtonBackgroundColor] = useState({backgroundColor: "white"})
-   const [borderColorChange, setBorderColorChange] = useState({borderColor: "black"})
+   const [styles, setStyles] = useState({
+    color: "black",
+    backgroundColor: "white",
+    buttonColor: "white",
+    buttonBackgroundColor: "black",
+    borderColor: "white"
+   })
 
   function changeColor() {
-    setColor({color: color.color === "white" ? "black" : "white"}
-    );
-    document.body.style.backgroundColor = pageColor.backgroundColor === "white" ? "black" : "white";
-    setPageColor({ backgroundColor: document.body.style.backgroundColor });
-    setButtonColor({color: buttonColor.color === "black" ? "white" : "black"})
-    setButtonBackgroundColor({backgroundColor: buttonBackgroundColor.backgroundColor === "white" ? "black" : "white"})
-    setBorderColorChange({borderColor: borderColorChange.borderColor==="black" ? "white" : "black"})
-  }
+    setStyles(prevStyles => ({ color: prevStyles.color === "white" ? "black" : "white", backgroundColor: prevStyles.backgroundColor === "white" ? "black" : "white", buttonColor: prevStyles.buttonColor === "black" ? "white" : "black", buttonBackgroundColor: prevStyles.buttonBackgroundColor === "white" ? "black" : "white", 
+      borderColor: prevStyles.borderColor === "white" ? "black" : "white" })); 
+      document.body.style.backgroundColor = styles.backgroundColor === "white" ? "black" : "white"; }
 
   return (
     <>
       <div className="container">
-        <h1 style={color}>Hello World !</h1>
-        <button onClick={changeColor} style={{...buttonColor, ...buttonBackgroundColor, borderColor: borderColorChange.borderColor}} >
+        <h1 style={{color: styles.color}}>Hello World !</h1>
+        <button onClick={changeColor} style={{
+          color: styles.buttonColor,
+          backgroundColor: styles.buttonBackgroundColor,
+          borderColor: styles.borderColor
+        }} >
           Change Theme
         </button>
       </div>
